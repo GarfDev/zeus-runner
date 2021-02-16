@@ -1,9 +1,12 @@
-import * as actions from './actions';
-import { ActionType } from 'typesafe-actions';
+import * as actions from './actions'
+import { ActionType } from 'typesafe-actions'
 
-
-export type ApplicationActions = ActionType<typeof actions>;
+export type ApplicationActions = ActionType<typeof actions>
 
 export interface ApplicationState {
-    resumeToken: string;
+  url: string
+  token: string
+  resumeToken?: string
+  sequenceNumber?: number
+  username?: string
 }

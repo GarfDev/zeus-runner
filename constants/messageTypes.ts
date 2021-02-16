@@ -1,0 +1,6 @@
+enum MESSAGE_TYPE {
+    READY = 'READY',
+    SESSIONS_REPLACE = 'SESSIONS_REPLACE',
+}
+
+export default MESSAGE_TYPE

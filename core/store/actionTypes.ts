@@ -1,5 +1,9 @@
 enum ActionTypes {
-    UPDATE_RESUME_TOKEN = '@core/UPDATE_RESUME_TOKEN'
+  UPDATE_URL = '@core/UPDATE_URL',
+  UPDATE_TOKEN = '@core/UPDATE_TOKEN',
+  UPDATE_SEQUENCE_NUMBER = '@core/UPDATE_SEQUENCE_NUMBER',
+  UPDATE_RESUME_TOKEN = '@core/UPDATE_RESUME_TOKEN',
+  UPDATE_USERNAME = '@core/UPDATE_USERNAME',
 }
 
-export default ActionTypes;
+export default ActionTypes
