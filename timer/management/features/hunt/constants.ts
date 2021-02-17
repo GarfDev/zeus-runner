@@ -1,0 +1,1 @@
+export const HUNT_COMMAND = 'owo h'

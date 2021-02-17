@@ -9,4 +9,7 @@ export interface ApplicationState {
   resumeToken?: string
   sequenceNumber?: number
   username?: string
+  // Client State
+  isCaptchaRequired: boolean;
+  channelId?: string;
 }

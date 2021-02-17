@@ -24,3 +24,13 @@ export const tokenSelector = createSelector(
 )
 
 export const urlSelector = createSelector(rootSelector, (state) => state.url)
+
+export const isCaptchaRequiredSelector = createSelector(
+  rootSelector,
+  (state) => state.isCaptchaRequired
+)
+
+export const channelIdSelector = createSelector(
+  rootSelector,
+  (state) => state.channelId
+)

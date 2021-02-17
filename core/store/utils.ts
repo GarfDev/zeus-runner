@@ -9,5 +9,8 @@ export const getInitialState = (): ApplicationState => {
     sequenceNumber: yamlConfig.SEQUENCE_NUMBER,
     token: '',
     url: '',
+    // Worker State Manager
+    isCaptchaRequired: false,
+    channelId: '811448312078139412',
   }
 }
