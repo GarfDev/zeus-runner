@@ -4,7 +4,7 @@ import { Message } from './types'
 import OP_CODE from 'constants/op'
 import { getInitialAuthenticationParams } from 'features/authentication'
 import { useDispatch, useSelector } from 'utils/hooks'
-import { tokenSelector } from 'core/store/selector'
+import { resumeTokenSelector, tokenSelector } from 'core/store/selector'
 import { updateSequenceNumber } from 'core/store/actions'
 import messageListener from './listeners'
 
@@ -16,15 +16,18 @@ const createMessageListener = (conn: connection) => (message: IMessage) => {
   switch (data.op) {
     //
     case OP_CODE.HELLO: {
+      const resumeToken = useSelector(resumeTokenSelector)
+      if (resumeToken) break;
       const token = useSelector(tokenSelector)
       const authenticationPayload = getInitialAuthenticationParams(token)
       conn.send(JSON.stringify(authenticationPayload))
-      break;
+      console.log('Authentication Message Sent with token', token)
+      break
     }
     //
     case OP_CODE.DISPATCH: {
-      messageListener(data)
-      break;
+      messageListener(conn)(data)
+      break
     }
     //
   }

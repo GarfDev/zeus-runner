@@ -1,6 +1,6 @@
 import application from './app'
 
 application({
-  token: 'NDAzNzU1MzU5NDM4NjM1MDI5.YCwd2A.SDDtbCb97uYBqVac4GVispaIORM',
+  token: 'ODExMzAyNDY4NDY1MTk3MDk2.YCyFKw.Nj9FPvL0pkx3ccNpkGFK222DZHo',
   url: 'wss://gateway.discord.gg/?encoding=json&v=8',
 })
