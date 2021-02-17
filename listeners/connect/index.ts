@@ -1,5 +1,4 @@
 import { connection } from 'websocket'
-import { getClient } from 'core/client'
 // Features
 import createMessageListener from 'listeners/message'
 import createReconnectListener from 'listeners/reconnect'

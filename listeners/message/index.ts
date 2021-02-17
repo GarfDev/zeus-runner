@@ -5,7 +5,7 @@ import OP_CODE from 'constants/op'
 import { getInitialAuthenticationParams } from 'features/authentication'
 import { useDispatch, useSelector } from 'utils/hooks'
 import { resumeTokenSelector, tokenSelector } from 'core/store/selector'
-import { updateSequenceNumber } from 'core/store/actions'
+import { updateResumeToken, updateSequenceNumber } from 'core/store/actions'
 import messageListener from './listeners'
 
 const createMessageListener = (conn: connection) => (message: IMessage) => {
@@ -17,7 +17,7 @@ const createMessageListener = (conn: connection) => (message: IMessage) => {
     //
     case OP_CODE.HELLO: {
       const resumeToken = useSelector(resumeTokenSelector)
-      if (resumeToken) break;
+      if (resumeToken) break
       const token = useSelector(tokenSelector)
       const authenticationPayload = getInitialAuthenticationParams(token)
       conn.send(JSON.stringify(authenticationPayload))
@@ -30,7 +30,24 @@ const createMessageListener = (conn: connection) => (message: IMessage) => {
       break
     }
     //
+    case OP_CODE.INVALID_SESSION: {
+      const dispatch = useDispatch()
+      console.log('Failed to restore session from previous session_id')
+      dispatch(updateResumeToken(undefined))
+      //
+      setTimeout(() => {
+        const token = useSelector(tokenSelector)
+        const authenticationPayload = getInitialAuthenticationParams(token)
+        conn.send(JSON.stringify(authenticationPayload))
+        console.log('Re-authentication Message Sent with token', token)
+      }, 200)
+      break
+    }
+    //
   }
+
+  // Debug message
+  // console.log(data)
   //
 
   // Update Sequence Number
@@ -38,8 +55,6 @@ const createMessageListener = (conn: connection) => (message: IMessage) => {
     const dispatch = useDispatch()
     dispatch(updateSequenceNumber(data.s))
   }
-
-  console.log(data)
 }
 
 export default createMessageListener

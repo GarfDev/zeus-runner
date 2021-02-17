@@ -1,7 +1,7 @@
 import { action } from 'typesafe-actions'
 import ActionTypes from './actionTypes'
 
-export const updateResumeToken = (token: string) =>
+export const updateResumeToken = (token?: string) =>
   action(ActionTypes.UPDATE_RESUME_TOKEN, { token })
 
 export const updateUsername = (username: string) =>
