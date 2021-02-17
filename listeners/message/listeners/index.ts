@@ -12,7 +12,9 @@ import huntEmDown from 'timer/management/features/hunt'
 import messageCreate from './messageCreate'
 import { getNaturalNumber } from 'utils'
 
+
 const createMessageListener = (conn: connection) => (message: Message<any>) => {
+
   switch (message.t) {
     //
     case MESSAGE_TYPE.READY: {
@@ -40,6 +42,10 @@ const createMessageListener = (conn: connection) => (message: Message<any>) => {
     case MESSAGE_TYPE.MESSAGE_CREATE: {
       messageCreate(message)
       break
+    }
+    //
+    default: {
+      // console.log(message)
     }
     //
   }

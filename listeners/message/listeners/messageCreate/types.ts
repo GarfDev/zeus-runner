@@ -29,5 +29,5 @@ export interface PayloadMessage {
       avatar: string
     },
     attachments: [],
-    guild_id: string
+    guild_id?: string
 }

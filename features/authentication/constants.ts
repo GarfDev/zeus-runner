@@ -5,7 +5,7 @@ export const initialAuthenticationParams: AuthenticationParams = {
     op: OP_CODE.IDENTIFY,
     d: {
       token: "",
-      intents: 513,
+      intents: 13824,
       capabilities: 61,
       properties: {
         os: "Mac OS X",
@@ -24,7 +24,7 @@ export const initialAuthenticationParams: AuthenticationParams = {
         client_event_source: null
       },
       presence: {
-        status: "dnd",
+        status: "online",
         since: 0,
         activities: [],
         afk: false

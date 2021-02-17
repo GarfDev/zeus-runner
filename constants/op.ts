@@ -11,6 +11,7 @@ enum OP_CODE {
     INVALID_SESSION = 9,
     HELLO = 10,
     HEARTBEAT_ACK = 11,
+    CREATE_CHANNEL = 13,
 }
 
 export default OP_CODE

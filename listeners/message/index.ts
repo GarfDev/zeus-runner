@@ -44,11 +44,11 @@ const createMessageListener = (conn: connection) => (message: IMessage) => {
       break
     }
     //
+
   }
 
   // Debug message
   // console.log(data)
-  //
 
   // Update Sequence Number
   if (data.s) {

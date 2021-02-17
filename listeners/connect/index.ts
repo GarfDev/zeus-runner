@@ -8,7 +8,6 @@ import { urlSelector } from 'core/store/selector'
 
 const onConnect = (conn: connection) => {
   const url = useSelector(urlSelector)
-
   conn.on('message', createMessageListener(conn))
   conn.on('resume', createResumeListener(conn))
   conn.on('close', createReconnectListener(url))

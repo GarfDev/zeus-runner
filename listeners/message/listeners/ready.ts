@@ -7,8 +7,7 @@ function onReady(message: Message<any>) {
   // Update Resume token
   dispatch(updateResumeToken(message.d.session_id))
   // Update username
-  const username = `${message.d.user.username}#${message.d.user.discriminator}`
-  dispatch(updateUsername(username))
+  dispatch(updateUsername(message.d.user.username))
 }
 
 export default onReady

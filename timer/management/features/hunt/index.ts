@@ -1,10 +1,12 @@
+import getTimerManagement from '@timer/management'
+import { TIME_TYPE } from '@timer/management/constants'
 import axios from 'axios'
 import {
   channelIdSelector,
   isCaptchaRequiredSelector,
   tokenSelector,
 } from 'core/store/selector'
-import { getListNumber } from 'utils'
+import { getListNumber, getNaturalNumber } from 'utils'
 import { useSelector } from 'utils/hooks'
 import { HuntHeaderPayload } from './types'
 import { getHuntPayload, getHuntUrl } from './utils'
@@ -32,6 +34,17 @@ function huntEmDown() {
     })
     .then(() => {})
     .catch(() => {})
+
+  // Re-initialize interval
+  // Can change to setTimeout, but use
+  // Interval for faster clear out state
+  const timerManagement = getTimerManagement()
+  clearInterval(timerManagement[TIME_TYPE.HUNT]) // Remove old Interval
+  timerManagement[TIME_TYPE.HUNT] = setInterval(
+    // Add new Interval
+    huntEmDown,
+    (11 + getNaturalNumber()) * 1000
+  )
 }
 
 export default huntEmDown
