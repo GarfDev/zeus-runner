@@ -24,9 +24,10 @@ export function checkCaptchaMessage(message: Message<PayloadMessage>) {
   )
 
   if (!matchingCaptcha.length) return false
+  const captchaMessage = captchaMessages[0]
 
   if (checkDirectMessage(message)) {
-    switch (captchaMessages[0]) {
+    switch (captchaMessage) {
       //
       case CAPTCHA_TYPES.FIRST: {
         console.log('First type captcha')
@@ -35,6 +36,11 @@ export function checkCaptchaMessage(message: Message<PayloadMessage>) {
       //
       case CAPTCHA_TYPES.SEC: {
         console.log('Sec type captcha')
+        return true
+      }
+      //
+      case CAPTCHA_TYPES.THIRD: {
+        console.log('Third type captcha')
         return true
       }
       //
@@ -57,6 +63,11 @@ export function checkCaptchaMessage(message: Message<PayloadMessage>) {
       //
       case CAPTCHA_TYPES.SEC: {
         console.log('Sec type captcha')
+        return true
+      }
+      //
+      case CAPTCHA_TYPES.THIRD: {
+        console.log('Third type captcha')
         return true
       }
       //
