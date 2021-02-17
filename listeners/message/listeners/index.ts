@@ -11,10 +11,9 @@ import { TIME_TYPE } from 'timer/management/constants'
 import huntEmDown from 'timer/management/features/hunt'
 import messageCreate from './messageCreate'
 import { getNaturalNumber } from 'utils'
-
+import checkTheZoo from '@timer/management/features/zoo'
 
 const createMessageListener = (conn: connection) => (message: Message<any>) => {
-
   switch (message.t) {
     //
     case MESSAGE_TYPE.READY: {
@@ -32,9 +31,15 @@ const createMessageListener = (conn: connection) => (message: Message<any>) => {
         createHeartbeatListener(conn),
         41250
       )
+      // Hunt command
       timerManagement[TIME_TYPE.HUNT] = setInterval(
         huntEmDown,
         (11 + getNaturalNumber()) * 1000
+      )
+      // Zoo command
+      timerManagement[TIME_TYPE.ZOO] = setInterval(
+        checkTheZoo,
+        (11 + getNaturalNumber()) * 5000
       )
       break
     }

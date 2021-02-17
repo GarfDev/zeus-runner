@@ -4,8 +4,8 @@ import { HuntPayload } from './types'
 export const getHuntUrl = (channelId: string) =>
   `https://discord.com/api/v8/channels/${channelId}/messages`
 
-export const getHuntPayload = (nonce: string): HuntPayload => ({
+export const getMessagePayload = (nonce: string, content: string): HuntPayload => ({
     nonce: nonce,
-    content: HUNT_COMMAND,
+    content: content,
     tss: false,
 })

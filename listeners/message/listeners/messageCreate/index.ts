@@ -10,7 +10,7 @@ function messageCreate(message: Message<PayloadMessage>) {
   const currentUsername = useSelector(usernameSelector);
   if (message.d.author.username === currentUsername) return
   // Check if message from OwO Bot
-  console.log(message)
+  // console.log(message)
   const isFromOwOBot = checkFromOwOBot(message)
   if (!isFromOwOBot) return
   //   console.log(message.d.content)

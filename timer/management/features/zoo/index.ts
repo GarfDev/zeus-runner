@@ -8,18 +8,18 @@ import {
 } from 'core/store/selector'
 import { getListNumber, getNaturalNumber } from 'utils'
 import { useSelector } from 'utils/hooks'
-import { HUNT_COMMAND } from './constants'
-import { HuntHeaderPayload } from './types'
-import { getMessagePayload, getHuntUrl } from './utils'
+import { HuntHeaderPayload } from '../hunt/types'
+import { getHuntUrl, getMessagePayload } from '../hunt/utils'
+import { ZOO_COMMAND } from './constants'
 
-function huntEmDown() {
+function checkTheZoo() {
   const isCaptchaRequired = useSelector(isCaptchaRequiredSelector)
   const channelId = useSelector(channelIdSelector)
   if (isCaptchaRequired || !channelId) return // Skip if values í not there
   // Continue process characters
   const urlToSend = getHuntUrl(channelId)
   const nonce = getListNumber(18).join('')
-  const payload = getMessagePayload(nonce, HUNT_COMMAND)
+  const payload = getMessagePayload(nonce, ZOO_COMMAND)
 
   // Init Headers
   const token = useSelector(tokenSelector)
@@ -40,12 +40,12 @@ function huntEmDown() {
   // Can change to setTimeout, but use
   // Interval for faster clear out state
   const timerManagement = getTimerManagement()
-  clearInterval(timerManagement[TIME_TYPE.HUNT]) // Remove old Interval
-  timerManagement[TIME_TYPE.HUNT] = setInterval(
+  clearInterval(timerManagement[TIME_TYPE.ZOO]) // Remove old Interval
+  timerManagement[TIME_TYPE.ZOO] = setInterval(
     // Add new Interval
-    huntEmDown,
-    (11 + getNaturalNumber()) * 1000
+    checkTheZoo,
+    (5 + getNaturalNumber()) * 50000
   )
 }
 
-export default huntEmDown
+export default checkTheZoo
