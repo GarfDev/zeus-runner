@@ -15,3 +15,9 @@ export const updateToken = (token: string) =>
 
 export const updateUrl = (url: string) =>
   action(ActionTypes.UPDATE_URL, { url })
+
+export const updateCaptchaRequired = (required: boolean) =>
+  action(ActionTypes.UPDATE_CAPTCHA_REQUIRED, { required })
+
+export const updateChannelId = (channelId: string) =>
+  action(ActionTypes.UPDATE_CHANNEL_ID, { channelId })

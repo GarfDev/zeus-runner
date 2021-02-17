@@ -30,8 +30,8 @@ function huntEmDown() {
     .post(urlToSend, payload, {
       headers: headers,
     })
-    .then(console.log)
-    .catch(console.log)
+    .then(() => {})
+    .catch(() => {})
 }
 
 export default huntEmDown

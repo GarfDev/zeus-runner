@@ -39,6 +39,19 @@ const rootReducer = (state = getInitialState(), action: ApplicationActions) => {
       })
     }
     //
+    case ActionTypes.UPDATE_CAPTCHA_REQUIRED: {
+      return produce(state, (nextState) => {
+        nextState.isCaptchaRequired = action.payload.required
+      })
+    }
+    //
+    case ActionTypes.UPDATE_CHANNEL_ID: {
+      return produce(state, (nextState) => {
+        nextState.channelId = action.payload.channelId
+      })
+    }
+
+    //
     default: {
       return state
     }
