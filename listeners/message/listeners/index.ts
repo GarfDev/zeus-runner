@@ -8,10 +8,11 @@ import { useSelector } from 'utils/hooks'
 import createHeartbeatListener from 'listeners/heartbeat'
 import { usernameSelector } from 'core/store/selector'
 import { TIME_TYPE } from 'timer/management/constants'
-import huntEmDown from 'timer/management/features/hunt'
 import messageCreate from './messageCreate'
 import { getNaturalNumber } from 'utils'
+import huntEmDown from 'timer/management/features/hunt'
 import checkTheZoo from '@timer/management/features/zoo'
+import sellTheZoo from '@timer/management/features/sell'
 
 const createMessageListener = (conn: connection) => (message: Message<any>) => {
   switch (message.t) {
@@ -41,6 +42,12 @@ const createMessageListener = (conn: connection) => (message: Message<any>) => {
         checkTheZoo,
         (11 + getNaturalNumber()) * 5000
       )
+      // Sell Command
+      timerManagement[TIME_TYPE.SELL] = setInterval(
+        sellTheZoo,
+        (11 + getNaturalNumber()) * 50000
+      )
+
       break
     }
     //

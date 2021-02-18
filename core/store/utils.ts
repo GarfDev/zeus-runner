@@ -11,6 +11,6 @@ export const getInitialState = (): ApplicationState => {
     url: '',
     // Worker State Manager
     isCaptchaRequired: false,
-    channelId: '811448312078139412',
+    channelId: '',
   }
 }

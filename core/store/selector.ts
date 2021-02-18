@@ -34,3 +34,5 @@ export const channelIdSelector = createSelector(
   rootSelector,
   (state) => state.channelId
 )
+
+export const idSelector = createSelector(rootSelector, (state) => state.id)

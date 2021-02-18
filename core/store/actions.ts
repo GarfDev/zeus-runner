@@ -4,6 +4,9 @@ import ActionTypes from './actionTypes'
 export const updateResumeToken = (token?: string) =>
   action(ActionTypes.UPDATE_RESUME_TOKEN, { token })
 
+  export const updateId = (id: string) =>
+  action(ActionTypes.UPDATE_ID, { id })
+
 export const updateUsername = (username: string) =>
   action(ActionTypes.UPDATE_USERNAME, { username })
 

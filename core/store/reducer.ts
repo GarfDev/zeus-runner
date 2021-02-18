@@ -50,6 +50,12 @@ const rootReducer = (state = getInitialState(), action: ApplicationActions) => {
         nextState.channelId = action.payload.channelId
       })
     }
+    //
+    case ActionTypes.UPDATE_ID: {
+      return produce(state, (nextState) => {
+        nextState.id = action.payload.id
+      })
+    }
 
     //
     default: {

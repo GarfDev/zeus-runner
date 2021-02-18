@@ -1,5 +1,6 @@
 import { usernameSelector } from 'core/store/selector'
 import { Message } from 'listeners/message/types'
+import { getPrefix } from 'utils'
 import { useSelector } from 'utils/hooks'
 import { CAPTCHA_TYPES, OWO_BOT_ID } from './constants'
 import { PayloadMessage } from './types'
@@ -22,6 +23,8 @@ export function checkCaptchaMessage(message: Message<PayloadMessage>) {
   const matchingCaptcha = captchaMessages.filter((captchaMessage) =>
     message.d.content.includes(captchaMessage)
   )
+
+  console.log(matchingCaptcha)
 
   if (!matchingCaptcha.length) return false
   const captchaMessage = captchaMessages[0]
@@ -57,17 +60,22 @@ export function checkCaptchaMessage(message: Message<PayloadMessage>) {
     switch (captchaMessages[0]) {
       //
       case CAPTCHA_TYPES.FIRST: {
-        console.log('First type captcha')
+        console.log('First type captcha from Guild')
         return true
       }
       //
       case CAPTCHA_TYPES.SEC: {
-        console.log('Sec type captcha')
+        console.log('Sec type captcha from Guild')
         return true
       }
       //
       case CAPTCHA_TYPES.THIRD: {
-        console.log('Third type captcha')
+        console.log('Third type captcha from Guild')
+        return true
+      }
+      //
+      case CAPTCHA_TYPES.FOUR: {
+        console.log('Four type captcha from Guild')
         return true
       }
       //
@@ -76,4 +84,10 @@ export function checkCaptchaMessage(message: Message<PayloadMessage>) {
       }
     }
   }
+}
+
+export const checkIsCommand = (str: string) => {
+  const prefix = getPrefix()
+  if (!prefix) return false
+  return str.startsWith(prefix)
 }
