@@ -7,7 +7,7 @@ import { getConfig } from ".";
 function writeConfig(config: Config) {
   const previousConfig = getConfig();
   const yamlConfig = YAML.stringify({ ...previousConfig, ...config });
-  writeFile(CONFIG_FILENAME, yamlConfig);
+  writeFile(`${process.pid}_${CONFIG_FILENAME}`, yamlConfig);
 }
 
 export default writeConfig;

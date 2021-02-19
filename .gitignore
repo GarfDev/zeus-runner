@@ -117,3 +117,4 @@ dist
 
 # Application storeable state
 config.yaml
+*_config.yaml

@@ -13,19 +13,17 @@ function captchaHandler(
 ) {
   const dispatch = useDispatch()
   dispatch(updateCaptchaRequired(true))
-
-  console.log(message.d.content, captchaType)
-
+  //////////////////////////////
   switch (captchaType) {
+    //////////////////////////////
     case CAPTCHA_TYPES.LINK: {
       const parsedLinks = getURL(message.d.content)
       if (!parsedLinks?.length) return // Return if there no link
       const captchaLink = parsedLinks[0]
       const channelId = useSelector(channelIdSelector)
       if (!channelId) return
-
       const payload = {
-        content: '!captcha link ' + captchaLink,
+        content: '!captcha link ' + captchaLink + ` <@623918573449904150>`,
         tss: false,
       }
       sendMessage(channelId, payload)
@@ -33,11 +31,22 @@ function captchaHandler(
         .catch(() => {})
       break
     }
+    //////////////////////////////
     case CAPTCHA_TYPES.IMAGE: {
-      const attachments = message.d.attachments
-      console.log(attachments)
+      const attachments = message.d.attachments as any[]
+      const channelId = useSelector(channelIdSelector)
+      if (!(channelId && attachments)) return
+      const payload = {
+        content:
+          '!captcha image ' + attachments[0].url + ` <@623918573449904150>`,
+        tss: false,
+      }
+      sendMessage(channelId, payload)
+        .then(() => {})
+        .catch(() => {})
       break
     }
+    //////////////////////////////
   }
 }
 
