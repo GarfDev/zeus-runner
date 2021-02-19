@@ -11,6 +11,7 @@ export interface ApplicationState {
   // Client State
   id?: string;
   username?: string
+  owoChannelId?: string;
   isCaptchaRequired: boolean;
   channelId?: string;
 }

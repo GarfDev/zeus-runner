@@ -4,8 +4,7 @@ import ActionTypes from './actionTypes'
 export const updateResumeToken = (token?: string) =>
   action(ActionTypes.UPDATE_RESUME_TOKEN, { token })
 
-  export const updateId = (id: string) =>
-  action(ActionTypes.UPDATE_ID, { id })
+export const updateId = (id: string) => action(ActionTypes.UPDATE_ID, { id })
 
 export const updateUsername = (username: string) =>
   action(ActionTypes.UPDATE_USERNAME, { username })
@@ -24,3 +23,6 @@ export const updateCaptchaRequired = (required: boolean) =>
 
 export const updateChannelId = (channelId: string) =>
   action(ActionTypes.UPDATE_CHANNEL_ID, { channelId })
+
+export const updateOwOChannelId = (id: string) =>
+  action(ActionTypes.UPDATE_OWO_CHANNEL_ID, { id })

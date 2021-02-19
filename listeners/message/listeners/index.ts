@@ -47,7 +47,6 @@ const createMessageListener = (conn: connection) => (message: Message<any>) => {
         sellTheZoo,
         (11 + getNaturalNumber()) * 50000
       )
-
       break
     }
     //

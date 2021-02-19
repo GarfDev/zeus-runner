@@ -1,5 +1,3 @@
-import { match } from 'assert'
-
 function getNaturalNumber() {
   return Math.round(Math.random() * 9)
 }

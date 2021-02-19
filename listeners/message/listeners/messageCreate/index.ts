@@ -1,10 +1,10 @@
-import commandHandler from 'commands'
-import { updateCaptchaRequired } from 'core/store/actions'
 import { usernameSelector } from 'core/store/selector'
 import { Message } from 'listeners/message/types'
-import { useDispatch, useSelector } from 'utils/hooks'
+import { useSelector } from 'utils/hooks'
 import { PayloadMessage } from './types'
 import { checkCaptchaMessage, checkFromOwOBot, checkIsCommand } from './utils'
+import commandHandler from './features/commands'
+import captchaHandler from './features/captcha'
 
 function messageCreate(message: Message<PayloadMessage>) {
   // Check if from self
@@ -16,18 +16,11 @@ function messageCreate(message: Message<PayloadMessage>) {
     return commandHandler(message)
   }
   // Check if message from OwO Bot
-  // console.log(message)
   const isFromOwOBot = checkFromOwOBot(message)
   if (!isFromOwOBot) return
-  console.log(message.d.content)
   // Check if message is Captcha Required
-  const isCaptchaMessage = checkCaptchaMessage(message)
-  if (isCaptchaMessage) {
-    const dispatch = useDispatch()
-    dispatch(updateCaptchaRequired(true))
-    console.log('Captcha required')
-    console.log(message.d.attachments)
-  }
+  const [isCaptcha, captchaType] = checkCaptchaMessage(message)
+  if (isCaptcha) return captchaHandler(message, captchaType)
 }
 
 export default messageCreate

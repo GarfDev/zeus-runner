@@ -56,7 +56,12 @@ const rootReducer = (state = getInitialState(), action: ApplicationActions) => {
         nextState.id = action.payload.id
       })
     }
-
+    //
+    case ActionTypes.UPDATE_OWO_CHANNEL_ID: {
+      return produce(state, (nextState) => {
+        nextState.owoChannelId = action.payload.id
+      })
+    }
     //
     default: {
       return state

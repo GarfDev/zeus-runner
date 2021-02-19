@@ -36,3 +36,8 @@ export const channelIdSelector = createSelector(
 )
 
 export const idSelector = createSelector(rootSelector, (state) => state.id)
+
+export const owoChannelSelector = createSelector(
+  rootSelector,
+  (state) => state.owoChannelId
+)
