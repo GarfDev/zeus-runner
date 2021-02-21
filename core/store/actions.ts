@@ -1,3 +1,4 @@
+import { CAPTCHA_TYPES } from 'listeners/message/listeners/messageCreate/constants'
 import { action } from 'typesafe-actions'
 import ActionTypes from './actionTypes'
 
@@ -26,3 +27,6 @@ export const updateChannelId = (channelId: string) =>
 
 export const updateOwOChannelId = (id: string) =>
   action(ActionTypes.UPDATE_OWO_CHANNEL_ID, { id })
+
+export const updatePreviousCaptcha = (type: CAPTCHA_TYPES, link: string) =>
+  action(ActionTypes.UPDATE_PREVIOUS_CAPTCHA, { type, link })

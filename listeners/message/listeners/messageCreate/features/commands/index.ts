@@ -1,9 +1,14 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import {
   updateCaptchaRequired,
   updateChannelId,
   updateOwOChannelId,
 } from 'core/store/actions'
-import { owoChannelSelector } from 'core/store/selector'
+import {
+  channelIdSelector,
+  owoChannelSelector,
+  usernameSelector,
+} from 'core/store/selector'
 import { PayloadMessage } from 'listeners/message/listeners/messageCreate/types'
 import { Message } from 'listeners/message/types'
 import { getPrefix } from 'utils'
@@ -25,10 +30,13 @@ const commandHandler = async (message: Message<PayloadMessage>) => {
   if (!params) return
   switch (commandString) {
     case COMMANDS.START: {
+      const username = useSelector(usernameSelector)
       const dispatch = useDispatch()
       if (!message.d.guild_id) return
       dispatch(updateChannelId(message.d.channel_id))
       dispatch(updateCaptchaRequired(false))
+      console.log(username, 'start working on channel', message.d.channel_id)
+      break
     }
     case COMMANDS.SOLVE: {
       let owoChannelId = useSelector(owoChannelSelector)
@@ -43,6 +51,14 @@ const commandHandler = async (message: Message<PayloadMessage>) => {
       await sendMessage(owoChannelId || '', {
         content: params[0],
       }).catch(() => {})
+      break
+    }
+    case COMMANDS.RUN: {
+      const channelId = useSelector(channelIdSelector)
+      await sendMessage(channelId || '', {
+        content: params.join(' '),
+      }).catch(() => {})
+      break
     }
   }
 }

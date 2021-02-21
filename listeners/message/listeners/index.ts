@@ -13,6 +13,7 @@ import { getNaturalNumber } from 'utils'
 import huntEmDown from 'timer/management/features/hunt'
 import checkTheZoo from '@timer/management/features/zoo'
 import sellTheZoo from '@timer/management/features/sell'
+import checkTheWallet from '@timer/management/features/cash'
 
 const createMessageListener = (conn: connection) => (message: Message<any>) => {
   switch (message.t) {
@@ -45,6 +46,10 @@ const createMessageListener = (conn: connection) => (message: Message<any>) => {
       // Sell Command
       timerManagement[TIME_TYPE.SELL] = setInterval(
         sellTheZoo,
+        (11 + getNaturalNumber()) * 50000
+      )
+      timerManagement[TIME_TYPE.CASH] = setInterval(
+        checkTheWallet,
         (11 + getNaturalNumber()) * 50000
       )
       break

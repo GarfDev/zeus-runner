@@ -1,11 +1,14 @@
-import { channelIdSelector } from 'core/store/selector'
+import { channelIdSelector, selectPreviousCaptcha } from 'core/store/selector'
 import { Message } from 'listeners/message/types'
 import { getURL } from 'utils'
 import { useDispatch, useSelector } from 'utils/hooks'
 import { sendMessage } from 'utils/requests'
 import { CAPTCHA_TYPES } from '../../constants'
 import { PayloadMessage } from '../../types'
-import { updateCaptchaRequired } from 'core/store/actions'
+import {
+  updateCaptchaRequired,
+  updatePreviousCaptcha,
+} from 'core/store/actions'
 
 function captchaHandler(
   message: Message<PayloadMessage>,
@@ -26,6 +29,7 @@ function captchaHandler(
         content: '!captcha link ' + captchaLink + ` <@623918573449904150>`,
         tss: false,
       }
+      dispatch(updatePreviousCaptcha(CAPTCHA_TYPES.LINK, captchaLink))
       sendMessage(channelId, payload)
         .then(() => {})
         .catch(() => {})
@@ -41,10 +45,30 @@ function captchaHandler(
           '!captcha image ' + attachments[0].url + ` <@623918573449904150>`,
         tss: false,
       }
+      dispatch(updatePreviousCaptcha(CAPTCHA_TYPES.IMAGE, attachments[0].url))
       sendMessage(channelId, payload)
         .then(() => {})
         .catch(() => {})
       break
+    }
+    //
+    case CAPTCHA_TYPES.RETRY: {
+      const channelId = useSelector(channelIdSelector)
+      const previousCaptcha = useSelector(selectPreviousCaptcha)
+      if (!previousCaptcha) return
+      if (!channelId) return
+
+      const payload = {
+        content:
+          '!captcha link ' + previousCaptcha.link + ` <@623918573449904150>`,
+        tss: false,
+      }
+      dispatch(
+        updatePreviousCaptcha(previousCaptcha.type, previousCaptcha.link)
+      )
+      sendMessage(channelId, payload)
+        .then(() => {})
+        .catch(() => {})
     }
     //////////////////////////////
   }

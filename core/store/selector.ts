@@ -41,3 +41,8 @@ export const owoChannelSelector = createSelector(
   rootSelector,
   (state) => state.owoChannelId
 )
+
+export const selectPreviousCaptcha = createSelector(
+  rootSelector,
+  (state) => state.previousCaptcha
+)

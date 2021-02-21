@@ -1,7 +1,8 @@
 import { idSelector } from 'core/store/selector'
 import { useSelector } from './hooks'
 
-const getPrefix = () => {
+const getPrefix = (isGlobal?: string) => {
+  if (isGlobal) return 'G'
   const id = useSelector(idSelector)
   return id
 }

@@ -26,6 +26,10 @@ export const checkLinkCaptcha = checkCaptchaByType(
   CAPTCHA_TYPE_MAP[CAPTCHA_TYPES.LINK]
 )
 
+export const checkRetryCaptcha = checkCaptchaByType(
+  CAPTCHA_TYPE_MAP[CAPTCHA_TYPES.RETRY]
+)
+
 export function checkFromOwOBot(message: Message<PayloadMessage>) {
   return message.d.author.id === OWO_BOT_ID
 }
@@ -62,6 +66,8 @@ export function checkCaptchaMessage(
       return [true, CAPTCHA_TYPES.IMAGE]
     } else if (checkLinkCaptcha(matchingCaptcha[0])) {
       return [true, CAPTCHA_TYPES.LINK]
+    } else if (checkRetryCaptcha(matchingCaptcha[0])) {
+      return [true, CAPTCHA_TYPES.RETRY]
     } else {
       return [false, CAPTCHA_TYPES.NONE]
     }

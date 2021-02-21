@@ -63,6 +63,15 @@ const rootReducer = (state = getInitialState(), action: ApplicationActions) => {
       })
     }
     //
+    case ActionTypes.UPDATE_PREVIOUS_CAPTCHA: {
+      return produce(state, (nextState) => {
+        nextState.previousCaptcha = {
+          type: action.payload.type,
+          link: action.payload.link,
+        }
+      })
+    }
+    //
     default: {
       return state
     }
