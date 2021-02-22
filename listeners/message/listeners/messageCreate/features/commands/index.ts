@@ -4,11 +4,7 @@ import {
   updateChannelId,
   updateOwOChannelId,
 } from 'core/store/actions'
-import {
-  channelIdSelector,
-  owoChannelSelector,
-  usernameSelector,
-} from 'core/store/selector'
+import { owoChannelSelector, usernameSelector } from 'core/store/selector'
 import { PayloadMessage } from 'listeners/message/listeners/messageCreate/types'
 import { Message } from 'listeners/message/types'
 import { getPrefix } from 'utils'
@@ -54,8 +50,7 @@ const commandHandler = async (message: Message<PayloadMessage>) => {
       break
     }
     case COMMANDS.RUN: {
-      const channelId = useSelector(channelIdSelector)
-      await sendMessage(channelId || '', {
+      await sendMessage(message.d.channel_id || '', {
         content: params.join(' '),
       }).catch(() => {})
       break

@@ -26,7 +26,7 @@ function captchaHandler(
       const channelId = useSelector(channelIdSelector)
       if (!channelId) return
       const payload = {
-        content: '!captcha link ' + captchaLink + ` <@623918573449904150>`,
+        content: 'link ' + captchaLink + ` <@623918573449904150>`,
         tss: false,
       }
       dispatch(updatePreviousCaptcha(CAPTCHA_TYPES.LINK, captchaLink))
@@ -60,7 +60,9 @@ function captchaHandler(
 
       const payload = {
         content:
-          '!captcha link ' + previousCaptcha.link + ` <@623918573449904150>`,
+          `!captcha ${previousCaptcha.type} ` +
+          previousCaptcha.link +
+          ` <@623918573449904150>`,
         tss: false,
       }
       dispatch(
