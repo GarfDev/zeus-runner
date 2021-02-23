@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import getTimerManagement from '@timer/management'
 import { TIME_TYPE } from '@timer/management/constants'
 import axios from 'axios'

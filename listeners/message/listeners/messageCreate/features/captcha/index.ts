@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+
 import { channelIdSelector, selectPreviousCaptcha } from 'core/store/selector'
 import { Message } from 'listeners/message/types'
 import { getURL } from 'utils'
@@ -71,6 +73,7 @@ function captchaHandler(
       sendMessage(channelId, payload)
         .then(() => {})
         .catch(() => {})
+      break
     }
     //////////////////////////////
   }
