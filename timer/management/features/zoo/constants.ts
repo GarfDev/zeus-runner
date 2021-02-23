@@ -1,1 +1,1 @@
-export const ZOO_COMMAND = 'owo zoo'
+export const ZOO_COMMAND = 'Catw'

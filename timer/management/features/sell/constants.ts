@@ -1,1 +1,1 @@
-export const SELL_COMMAND = 'owo sell all'
+export const SELL_COMMAND = 'Catf'

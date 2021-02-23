@@ -4,4 +4,6 @@ export enum TIME_TYPE {
   SELL = '@timer/management/SELL',
   CASH = '@timer/management/CASH',
   ZOO = '@timer/management/ZOO',
+  BK = '@timer/management/BK',
+  BDB = '@timer/management/BDB',
 }

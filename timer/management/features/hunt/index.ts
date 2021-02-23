@@ -30,7 +30,7 @@ function huntEmDown() {
   timerManagement[TIME_TYPE.HUNT] = setInterval(
     // Add new Interval
     huntEmDown,
-    (6 + getNaturalNumber()) * 1000
+    (25 + getNaturalNumber()) * 1000
   )
 }
 

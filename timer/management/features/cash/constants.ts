@@ -1,1 +1,1 @@
-export const COMMAND = 'owo cash'
+export const COMMAND = 'catf d'

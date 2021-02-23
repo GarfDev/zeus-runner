@@ -14,6 +14,9 @@ import huntEmDown from 'timer/management/features/hunt'
 import checkTheZoo from '@timer/management/features/zoo'
 import sellTheZoo from '@timer/management/features/sell'
 import checkTheWallet from '@timer/management/features/cash'
+import { setInterval } from 'timers'
+import runtheBk from '@timer/management/features/bk'
+import runtheBdb from '@timer/management/features/bdb'
 
 const createMessageListener = (conn: connection) => (message: Message<any>) => {
   switch (message.t) {
@@ -46,11 +49,19 @@ const createMessageListener = (conn: connection) => (message: Message<any>) => {
       // Sell Command
       timerManagement[TIME_TYPE.SELL] = setInterval(
         sellTheZoo,
-        (11 + getNaturalNumber()) * 50000
+        (11 + getNaturalNumber()) * 5000
       )
       timerManagement[TIME_TYPE.CASH] = setInterval(
         checkTheWallet,
-        (11 + getNaturalNumber()) * 50000
+        (11 + getNaturalNumber()) * 5000
+      )
+      timerManagement[TIME_TYPE.BK] = setInterval(
+        runtheBk,
+        (11 + getNaturalNumber()) * 5000
+      )
+      timerManagement[TIME_TYPE.BDB] = setInterval(
+        runtheBdb,
+        (11 + getNaturalNumber()) * 5000
       )
       break
     }
