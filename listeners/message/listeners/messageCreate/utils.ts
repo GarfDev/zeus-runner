@@ -7,6 +7,7 @@ import {
   CAPTCHA_TYPES,
   CAPTCHA_TYPE_MAP,
   OWO_BOT_ID,
+  OWO_MESSAGE_TYPES,
 } from './constants'
 import { PayloadMessage } from './types'
 
@@ -70,6 +71,33 @@ export function checkCaptchaMessage(
       return [true, CAPTCHA_TYPES.RETRY]
     } else {
       return [false, CAPTCHA_TYPES.NONE]
+    }
+  }
+}
+
+export const includesCheck = (message: Message<PayloadMessage>, str: string) =>
+  message.d.content.includes(str)
+
+export const checkOWOMessage = (message: Message<PayloadMessage>) => {
+  if (checkDirectMessage(message)) {
+    switch (true) {
+      default: {
+        return undefined
+      }
+    }
+  } else {
+    const username = useSelector(usernameSelector)
+    if (!username) return undefined
+    const isForCurrentUser = message.d.content.includes(username)
+    if (!isForCurrentUser) return undefined
+    switch (true) {
+      case includesCheck(message, OWO_MESSAGE_TYPES.MONEY): {
+        return OWO_MESSAGE_TYPES.MONEY
+      }
+      //
+      default: {
+        return undefined
+      }
     }
   }
 }

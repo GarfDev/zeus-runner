@@ -18,3 +18,8 @@ export const CAPTCHA_TYPE_MAP = {
   [CAPTCHA_TYPES.IMAGE]: [CAPTCHA.SEC],
   [CAPTCHA_TYPES.RETRY]: [CAPTCHA.THIRD],
 }
+
+export enum OWO_MESSAGE_TYPES {
+  NONE = 'NONE',
+  MONEY = 'you currently have',
+}
