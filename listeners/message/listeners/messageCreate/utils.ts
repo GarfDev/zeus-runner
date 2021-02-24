@@ -20,7 +20,7 @@ export function checkCaptchaByType(type: CAPTCHA[]) {
 }
 
 export const checkImageCaptcha = (message: Message<PayloadMessage>) =>
-  !!message.d.attachments.length ||
+  !!message.d.attachments.length &&
   (message.d.attachments as any).name.includes('captcha')
 
 export const checkLinkCaptcha = checkCaptchaByType(
