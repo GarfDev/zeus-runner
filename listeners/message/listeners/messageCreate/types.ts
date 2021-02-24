@@ -28,6 +28,6 @@ export interface PayloadMessage {
     discriminator: string
     avatar: string
   }
-  attachments: []
+  attachments: any[]
   guild_id?: string
 }

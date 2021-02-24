@@ -19,9 +19,13 @@ export function checkCaptchaByType(type: CAPTCHA[]) {
   return (captcha: CAPTCHA) => type.indexOf(captcha) > -1
 }
 
-export const checkImageCaptcha = (message: Message<PayloadMessage>) =>
-  !!message.d.attachments.length &&
-  (message.d.attachments as any).name.includes('captcha')
+export const checkImageCaptcha = (message: Message<PayloadMessage>) => {
+  if (!message.d.attachments.length) return
+  const isCaptchaImage = Array.from(
+    message.d.attachments
+  )[0]?.filename?.includes('captcha')
+  return isCaptchaImage
+}
 
 export const checkLinkCaptcha = checkCaptchaByType(
   CAPTCHA_TYPE_MAP[CAPTCHA_TYPES.LINK]
