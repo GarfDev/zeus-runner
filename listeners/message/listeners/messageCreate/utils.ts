@@ -52,12 +52,15 @@ export function checkCaptchaMessage(
   const matchingCaptcha = captchaMessages.filter((captchaMessage) =>
     message.d.content.includes(captchaMessage)
   )
-  if (!matchingCaptcha.length) return [false, CAPTCHA_TYPES.NONE]
 
   if (checkDirectMessage(message)) {
     if (checkImageCaptcha(message)) {
       return [true, CAPTCHA_TYPES.IMAGE]
-    } else if (checkLinkCaptcha(matchingCaptcha[0])) {
+    }
+    // Guard for matching other case
+    if (!matchingCaptcha.length) return [false, CAPTCHA_TYPES.NONE]
+    // Check other cases
+    if (checkLinkCaptcha(matchingCaptcha[0])) {
       return [true, CAPTCHA_TYPES.LINK]
     } else {
       return [false, CAPTCHA_TYPES.NONE]
@@ -68,10 +71,14 @@ export function checkCaptchaMessage(
     if (!username) return [false, CAPTCHA_TYPES.NONE]
     const isForCurrentUser = message.d.content.includes(username)
     if (!isForCurrentUser) return [false, CAPTCHA_TYPES.NONE]
+    
     if (checkImageCaptcha(message)) {
       return [true, CAPTCHA_TYPES.IMAGE]
     }
-    else if (checkLinkCaptcha(matchingCaptcha[0])) {
+    // Guard for matching other case
+    if (!matchingCaptcha.length) return [false, CAPTCHA_TYPES.NONE]
+    // Check other cases
+    if (checkLinkCaptcha(matchingCaptcha[0])) {
       return [true, CAPTCHA_TYPES.LINK]
     } else if (checkRetryCaptcha(matchingCaptcha[0])) {
       return [true, CAPTCHA_TYPES.RETRY]
