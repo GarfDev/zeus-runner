@@ -46,12 +46,6 @@ export function checkDirectMessage(message: Message<PayloadMessage>) {
 export function checkCaptchaMessage(
   message: Message<PayloadMessage>
 ): [boolean, CAPTCHA_TYPES] {
-  // Try to check Image Captcha first
-
-  if (checkImageCaptcha(message)) {
-    return [true, CAPTCHA_TYPES.IMAGE]
-  }
-
   // Then Check other case
   const captchaMessages = getCaptchaMessage()
 
@@ -61,7 +55,9 @@ export function checkCaptchaMessage(
   if (!matchingCaptcha.length) return [false, CAPTCHA_TYPES.NONE]
 
   if (checkDirectMessage(message)) {
-    if (checkLinkCaptcha(matchingCaptcha[0])) {
+    if (checkImageCaptcha(message)) {
+      return [true, CAPTCHA_TYPES.IMAGE]
+    } else if (checkLinkCaptcha(matchingCaptcha[0])) {
       return [true, CAPTCHA_TYPES.LINK]
     } else {
       return [false, CAPTCHA_TYPES.NONE]
@@ -72,7 +68,10 @@ export function checkCaptchaMessage(
     if (!username) return [false, CAPTCHA_TYPES.NONE]
     const isForCurrentUser = message.d.content.includes(username)
     if (!isForCurrentUser) return [false, CAPTCHA_TYPES.NONE]
-    if (checkLinkCaptcha(matchingCaptcha[0])) {
+    if (checkImageCaptcha(message)) {
+      return [true, CAPTCHA_TYPES.IMAGE]
+    }
+    else if (checkLinkCaptcha(matchingCaptcha[0])) {
       return [true, CAPTCHA_TYPES.LINK]
     } else if (checkRetryCaptcha(matchingCaptcha[0])) {
       return [true, CAPTCHA_TYPES.RETRY]
